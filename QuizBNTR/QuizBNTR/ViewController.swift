@@ -15,6 +15,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var labelAnswer: UILabel!
     @IBOutlet weak var labelTempQuestion: UILabel!
     
+    //MARK - Constraints
+    @IBOutlet weak var labelQuestionCenterXConstraint: NSLayoutConstraint!
+    @IBOutlet weak var labelTempQuestionCenterXConstraint: NSLayoutConstraint!
     
     //MARK - Source Properties
     let questions: [String] = [
@@ -54,6 +57,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         labelQuestion.text = questions[currentQuestionIndex]
+        updateOffScreenLabel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -61,15 +65,31 @@ class ViewController: UIViewController {
         labelQuestion.alpha = 0
     }
     
-    // MARK - Animations
+    // MARK - Animations - alpha
     func animateLabelTransitions() {
         //Animate the alpha
+        //and the center X constraints
+        
+        let screenWidth = view.frame.width
+        self.labelQuestionCenterXConstraint.constant = 0
+        self.labelTempQuestionCenterXConstraint.constant += screenWidth
+        
+        
         UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
             self.labelTempQuestion.alpha = 0
             self.labelQuestion.alpha = 1
+            self.view.layoutIfNeeded()
         }) { _ in
             swap(&self.labelTempQuestion, &self.labelQuestion)
+            swap(&self.labelQuestionCenterXConstraint, &self.labelTempQuestionCenterXConstraint)
+            self.updateOffScreenLabel()
         }
+    }
+    
+    // MARK - Animations with constraints
+    func updateOffScreenLabel() {
+        let screenWidth = view.frame.width
+        labelQuestionCenterXConstraint.constant = -screenWidth
     }
 }
 
