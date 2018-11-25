@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     //MARK - UI Properties
     @IBOutlet weak var labelQuestion: UILabel!
     @IBOutlet weak var labelAnswer: UILabel!
+    @IBOutlet weak var labelTempQuestion: UILabel!
     
     
     //MARK - Source Properties
@@ -63,9 +64,12 @@ class ViewController: UIViewController {
     // MARK - Animations
     func animateLabelTransitions() {
         //Animate the alpha
-        UIView.animate(withDuration: 0.5, animations: {() -> Void in
+        UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
+            self.labelTempQuestion.alpha = 0
             self.labelQuestion.alpha = 1
-        })
+        }) { _ in
+            swap(&self.labelTempQuestion, &self.labelQuestion)
+        }
     }
 }
 

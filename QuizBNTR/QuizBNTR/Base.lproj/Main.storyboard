@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -43,6 +43,12 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Pi-tK-HfG">
+                                <rect key="frame" x="16" y="78" width="343" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -50,11 +56,14 @@
                             <constraint firstItem="bGW-41-lqg" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="3Z1-fG-oEn"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="9hw-W2-fYs" secondAttribute="trailing" constant="16" id="3dP-Qo-sjF"/>
                             <constraint firstItem="SWw-lO-BZM" firstAttribute="top" secondItem="bGW-41-lqg" secondAttribute="bottom" constant="22" id="ALn-CM-5jU"/>
+                            <constraint firstItem="0Pi-tK-HfG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="Dcm-Jw-sbY"/>
                             <constraint firstItem="9hw-W2-fYs" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="58" id="Nk6-wn-jq4"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="SWw-lO-BZM" secondAttribute="trailing" constant="16" id="PZV-nZ-dnR"/>
                             <constraint firstItem="9hw-W2-fYs" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="Qwe-2P-f0K"/>
                             <constraint firstItem="GqL-vK-azT" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="R9d-K6-RI4"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="0Pi-tK-HfG" secondAttribute="trailing" constant="16" id="TlO-BV-7wt"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="bGW-41-lqg" secondAttribute="trailing" constant="16" id="cJR-Y4-FYA"/>
+                            <constraint firstItem="0Pi-tK-HfG" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="58" id="mbW-VA-XgP"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="GqL-vK-azT" secondAttribute="trailing" constant="16" id="oCd-bj-wVf"/>
                             <constraint firstItem="GqL-vK-azT" firstAttribute="top" secondItem="9hw-W2-fYs" secondAttribute="bottom" constant="8" id="odW-Id-KDD"/>
                             <constraint firstItem="bGW-41-lqg" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="skz-LC-WNS"/>
@@ -64,6 +73,7 @@
                     <connections>
                         <outlet property="labelAnswer" destination="bGW-41-lqg" id="yKl-ey-GYb"/>
                         <outlet property="labelQuestion" destination="9hw-W2-fYs" id="Mqh-aa-4C8"/>
+                        <outlet property="labelTempQuestion" destination="0Pi-tK-HfG" id="mqK-DP-QTh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
