@@ -46,6 +46,7 @@ class ViewController: UIViewController {
         labelQuestion.text = question
         labelAnswer.text = "???"
         animateLabelTransitions()
+        //springAnimation()
     }
     
     @IBAction func showAnswer(_ sender: UIButton) {
@@ -67,13 +68,15 @@ class ViewController: UIViewController {
     
     // MARK - Animations - alpha
     func animateLabelTransitions() {
+        
+        //Force outstanding layout changess to occur.
+        view.layoutIfNeeded()
+        
         //Animate the alpha
         //and the center X constraints
-        
         let screenWidth = view.frame.width
         self.labelQuestionCenterXConstraint.constant = 0
         self.labelTempQuestionCenterXConstraint.constant += screenWidth
-        
         
         UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
             self.labelTempQuestion.alpha = 0
@@ -85,6 +88,30 @@ class ViewController: UIViewController {
             self.updateOffScreenLabel()
         }
     }
+    // Bronze challenge
+    func springAnimation() {
+        //Force outstanding layout changess to occur.
+        view.layoutIfNeeded()
+        
+        //Animate the alpha
+        //and the center X constraints
+        let screenWidth = view.frame.width
+        self.labelQuestionCenterXConstraint.constant = 0
+        self.labelTempQuestionCenterXConstraint.constant += screenWidth
+        
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 10, initialSpringVelocity: 32, options: .curveLinear, animations: {
+            self.labelTempQuestion.alpha = 0
+            self.labelQuestion.alpha = 1
+            self.view.layoutIfNeeded()
+        }) { _ in
+            swap(&self.labelTempQuestion, &self.labelQuestion)
+            swap(&self.labelQuestionCenterXConstraint, &self.labelTempQuestionCenterXConstraint)
+            self.updateOffScreenLabel()
+        }
+    }
+    
+    // Silver challenge
+    
     
     // MARK - Animations with constraints
     func updateOffScreenLabel() {
