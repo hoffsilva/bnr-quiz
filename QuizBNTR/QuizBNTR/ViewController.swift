@@ -13,7 +13,11 @@ class ViewController: UIViewController {
     //MARK - UI Properties
     @IBOutlet weak var labelQuestion: UILabel!
     @IBOutlet weak var labelAnswer: UILabel!
+    @IBOutlet weak var labelTempQuestion: UILabel!
     
+    //MARK - Constraints
+    @IBOutlet weak var labelQuestionCenterXConstraint: NSLayoutConstraint!
+    @IBOutlet weak var labelTempQuestionCenterXConstraint: NSLayoutConstraint!
     
     //MARK - Source Properties
     let questions: [String] = [
@@ -41,7 +45,8 @@ class ViewController: UIViewController {
         let question = questions[currentQuestionIndex]
         labelQuestion.text = question
         labelAnswer.text = "???"
-        
+        animateLabelTransitions()
+        //springAnimation()
     }
     
     @IBAction func showAnswer(_ sender: UIButton) {
@@ -53,7 +58,68 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         labelQuestion.text = questions[currentQuestionIndex]
+        updateOffScreenLabel()
     }
- 
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        labelQuestion.alpha = 0
+    }
+    
+    // MARK - Animations - alpha
+    func animateLabelTransitions() {
+        
+        //Force outstanding layout changess to occur.
+        view.layoutIfNeeded()
+        
+        //Animate the alpha
+        //and the center X constraints
+        let screenWidth = view.frame.width
+        self.labelQuestionCenterXConstraint.constant = 0
+        self.labelTempQuestionCenterXConstraint.constant += screenWidth
+        
+        UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
+            self.labelTempQuestion.alpha = 0
+            self.labelQuestion.alpha = 1
+            self.view.layoutIfNeeded()
+        }) { _ in
+            swap(&self.labelTempQuestion, &self.labelQuestion)
+            swap(&self.labelQuestionCenterXConstraint, &self.labelTempQuestionCenterXConstraint)
+            self.updateOffScreenLabel()
+        }
+    }
+    // Bronze challenge
+    func springAnimation() {
+        //Force outstanding layout changess to occur.
+        view.layoutIfNeeded()
+        
+        //Animate the alpha
+        //and the center X constraints
+        let screenWidth = view.frame.width
+        self.labelQuestionCenterXConstraint.constant = 0
+        self.labelTempQuestionCenterXConstraint.constant += screenWidth
+        
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 10, initialSpringVelocity: 32, options: .curveLinear, animations: {
+            self.labelTempQuestion.alpha = 0
+            self.labelQuestion.alpha = 1
+            self.view.layoutIfNeeded()
+        }) { _ in
+            swap(&self.labelTempQuestion, &self.labelQuestion)
+            swap(&self.labelQuestionCenterXConstraint, &self.labelTempQuestionCenterXConstraint)
+            self.updateOffScreenLabel()
+        }
+    }
+    
+    // Silver challenge
+    
+    
+    // MARK - Animations with constraints
+    func updateOffScreenLabel() {
+        let screenWidth = view.frame.width
+        labelQuestionCenterXConstraint.constant = -screenWidth
+    }
 }
+
+
+
 
